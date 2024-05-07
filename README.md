@@ -1,2 +1,2 @@
 # Regex-TLPP
- Expressões Regulares em TL++
+ Exeplos de expressões regulares usando TL++

@@ -1,0 +1,31 @@
+#INCLUDE 'tlpp-core.th'
+
+using namespace tlpp.regex
+
+User Function regexFunction() 
+
+    Local oRegex as Object
+    Local aTokens := {} as Array
+    Local aIndex := {} as Array
+    Local cText as Character
+    Local cPattern as Character
+    Local xRet
+
+    cText := 'O Brasil foi descoberto no dia 22/04/1500, a America foi descoberta em 12-10-1492. '
+    cText += 'São Paulo foi fundado em 1554-01-25. '
+
+    cPattern := '\d{2}[\/|-]\d{2}[\/|-]\d{4}|\d{4}[\/|-]\d{2}[\/|-]\d{2}'
+
+    oRegex := Regex():New(cPattern)
+
+    // Valida se o padrão procurado existe no texto
+    xRet := oRegex:partialMatch(cText)
+
+    // Verificar se o padrão procurado existe no texto e coleta a informação
+    xRet := oRegex:tokenizer(cText, @aTokens, @aIndex)
+
+    // Substitui um conteúdo no padrão buscado por outro conteúdo
+    oRegex:setPattern('a')
+    xRet := oRegex:ReplaceAll(@cText, 'X')
+
+Return xRet
